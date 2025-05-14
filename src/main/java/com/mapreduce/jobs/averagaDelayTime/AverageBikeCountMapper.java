@@ -20,15 +20,15 @@ public class AverageBikeCountMapper extends MapReduceBase implements Mapper<Long
         String[] valueSplit = valueString.split(",");
 
         try {
-            long unixTimestamp = Long.parseLong(valueSplit[12]);
-            Date date = new Date(unixTimestamp * 1000L); // Unix zaman damgası saniye cinsinden olduğu için 1000 ile çarpmamız gerekiyor
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-            String[] formattedDateTime = sdf.format(date).split(" ");
+            //long unixTimestamp = Long.parseLong(valueSplit[12]);
+            //Date date = new Date(unixTimestamp * 1000L); // Unix zaman damgası saniye cinsinden olduğu için 1000 ile çarpmamız gerekiyor
+            //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            //String[] formattedDateTime = sdf.format(date).split(" ");
 
-            int week = Integer.parseInt(formattedDateTime[0].split("-")[2]) / 8;
-            String dateWeek = formattedDateTime[0].split("-")[0] + "-" + formattedDateTime[0].split("-")[1];
+            int arriveDelay = Integer.parseInt(valueSplit[15]);
+            String dateWeek = Integer.parseInt(valueSplit[4]);
 
-            output.collect(new Text(dateWeek + " week " + (week +1)) ,new IntWritable(Integer.parseInt(valueSplit[1])));
+            output.collect(new Text(dateWeek) , new IntWritable(Integer.parseInt(arriveDelay)));
         } catch (Exception e) {
             System.out.println(e.toString());
         }
