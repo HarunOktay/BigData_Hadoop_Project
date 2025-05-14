@@ -26,9 +26,9 @@ public class AverageBikeCountMapper extends MapReduceBase implements Mapper<Long
             //String[] formattedDateTime = sdf.format(date).split(" ");
 
             int arriveDelay = Integer.parseInt(valueSplit[15]);
-            String dateWeek = Integer.parseInt(valueSplit[4]);
+            String dateWeek = valueSplit[4];
 
-            output.collect(new Text(dateWeek) , new IntWritable(Integer.parseInt(arriveDelay)));
+            output.collect(new Text(dateWeek) , new IntWritable(arriveDelay));
         } catch (Exception e) {
             System.out.println(e.toString());
         }

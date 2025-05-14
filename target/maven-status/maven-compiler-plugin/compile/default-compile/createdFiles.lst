@@ -1,4 +1,5 @@
 com\mapreduce\dialog\jobs\EbikeMechBikeCountCompDialog$1.class
+com\mapreduce\jobs\dailyReportCount\DailyReportCountReducer.class
 com\mapreduce\util\ProcessHandler.class
 com\mapreduce\dialog\jobs\DailyTotalReportCountDialog$1.class
 com\mapreduce\Main$6.class
@@ -32,6 +33,7 @@ com\mapreduce\dialog\jobs\BikeCheckDialog.class
 com\mapreduce\jobs\stdBikeCount\StdBikeCountRunner.class
 com\mapreduce\Main$10.class
 com\mapreduce\dialog\jobs\AverageBikesDialog$1.class
+com\mapreduce\jobs\dailyReportCount\DailyReportCountRunner.class
 com\mapreduce\jobs\minMaxAvailableBikeCount\MinMaxAvailableBikeMapper.class
 com\mapreduce\jobs\ebikeMechBikeComp\EbikeMechBikeCompReducer.class
 com\mapreduce\dialog\RemoveDialog$1.class
@@ -48,6 +50,7 @@ com\mapreduce\Main$8.class
 com\mapreduce\Singletons.class
 com\mapreduce\jobs\averageBikeCount\AverageBikeCountRunner.class
 com\mapreduce\dialog\jobs\AverageDockDialog$2.class
+com\mapreduce\jobs\dailyReportCount\DailyReportCountMapper.class
 com\mapreduce\dialog\TableDialog$2.class
 com\mapreduce\jobs\stdBikeCount\StdBikeCountMapper.class
 com\mapreduce\dialog\jobs\AverageDockDialog.class
