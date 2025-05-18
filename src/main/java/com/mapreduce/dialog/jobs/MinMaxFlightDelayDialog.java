@@ -21,11 +21,11 @@ import javax.swing.border.EmptyBorder;
 
 import com.mapreduce.ReadWrite;
 import com.mapreduce.dialog.TableDialog;
-import com.mapreduce.jobs.dailyReportCount.DailyReportCountRunner;
+import com.mapreduce.jobs.minMaxDelay.MinMaxFlightDelayRunner;
 import com.mapreduce.util.MultiRenderer;
 import com.mapreduce.util.SelectionManager;
 
-public class DailyTotalReportCountDialog extends JDialog {
+public class MinMaxFlightDelayDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblNewLabel_1;
@@ -35,8 +35,8 @@ public class DailyTotalReportCountDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public DailyTotalReportCountDialog() {
-		setTitle("Daily Total Report Count");
+	public MinMaxFlightDelayDialog() {
+		setTitle("Min/Max Flight Delay");
 		setBounds(100, 100, 554, 150);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -109,7 +109,7 @@ public class DailyTotalReportCountDialog extends JDialog {
 						String output = textField.getText();
 						if (output == null || output.trim().isEmpty()) return;
 						long start = System.nanoTime();
-						DailyReportCountRunner.run(selected, output);
+						MinMaxFlightDelayRunner.run(selected, output);
 						long end = System.nanoTime();
 						System.out.printf("%.2fs elapsed\n", ((end - start) * Math.pow(10, -9)));
 						try {
@@ -118,7 +118,7 @@ public class DailyTotalReportCountDialog extends JDialog {
 							System.out.println(selected);
 							for (String res : results) {
 								if (res.contains("part"))
-									new TableDialog(new String[] {"Date", "Count"}, ReadWrite.readTabular(res));
+									new TableDialog(new String[] {"Airline", "Min Delay", "Max Delay"}, ReadWrite.readTabular(res));
 							}
 						} catch (Exception e1) {
 							e1.printStackTrace();
@@ -146,4 +146,4 @@ public class DailyTotalReportCountDialog extends JDialog {
 		setVisible(true);
 	}
 
-}
+} 

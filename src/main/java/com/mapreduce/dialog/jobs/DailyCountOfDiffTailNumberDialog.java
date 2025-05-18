@@ -21,11 +21,11 @@ import javax.swing.border.EmptyBorder;
 
 import com.mapreduce.ReadWrite;
 import com.mapreduce.dialog.TableDialog;
-import com.mapreduce.jobs.stdBikeCount.StdBikeCountRunner;
+import com.mapreduce.jobs.dailyCountOfDiffTailNumber.DailyCountOfDiffTailNumberRunner;
 import com.mapreduce.util.MultiRenderer;
 import com.mapreduce.util.SelectionManager;
 
-public class StdAvailableBikeDialog extends JDialog {
+public class DailyCountOfDiffTailNumberDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblNewLabel_1;
@@ -35,8 +35,8 @@ public class StdAvailableBikeDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public StdAvailableBikeDialog() {
-		setTitle("Std Bike Count");
+	public DailyCountOfDiffTailNumberDialog() {
+		setTitle("Daily Count of Different Tail Numbers");
 		setBounds(100, 100, 554, 150);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -109,16 +109,17 @@ public class StdAvailableBikeDialog extends JDialog {
 						String output = textField.getText();
 						if (output == null || output.trim().isEmpty()) return;
 						long start = System.nanoTime();
-						StdBikeCountRunner.run(selected, output);
+						DailyCountOfDiffTailNumberRunner.run(selected, output);
 						long end = System.nanoTime();
 						System.out.printf("%.2fs elapsed\n", ((end - start) * Math.pow(10, -9)));
 						try {
-							System.err.println("soemthing cover try block");
 							String[] results = ReadWrite.getFiles(output);
-							 for (String res : results) {
-							 	if (res.contains("part"))
-							 		new TableDialog(new String[] {"Date", "Std Value"}, ReadWrite.readTabular(res));
-							 }
+                            System.out.println(results);
+							System.out.println(selected);
+							for (String res : results) {
+								if (res.contains("part"))
+									new TableDialog(new String[] {"Date (YYYY-MM-DD)", "Unique Tail Number Count"}, ReadWrite.readTabular(res));
+							}
 						} catch (Exception e1) {
 							e1.printStackTrace();
 							new TableDialog(new String[] {"ERROR"}, new Object[0][0]);
@@ -145,4 +146,4 @@ public class StdAvailableBikeDialog extends JDialog {
 		setVisible(true);
 	}
 
-}
+} 

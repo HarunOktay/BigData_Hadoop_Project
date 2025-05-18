@@ -11,13 +11,11 @@ import com.mapreduce.dialog.ReadDialog;
 import com.mapreduce.dialog.RemoveDialog;
 import com.mapreduce.dialog.RemoveDirectoryDialog;
 import com.mapreduce.dialog.WriteDialog;
-import com.mapreduce.dialog.jobs.AverageBikesDialog;
-import com.mapreduce.dialog.jobs.MinMaxAvailableBikesDialog;
-import com.mapreduce.dialog.jobs.StdAvailableBikeDialog;
-import com.mapreduce.dialog.jobs.BikeCheckDialog;
-import com.mapreduce.dialog.jobs.DailyTotalReportCountDialog;
-import com.mapreduce.dialog.jobs.EbikeMechBikeCountCompDialog;
-import com.mapreduce.dialog.jobs.AverageDockDialog;
+import com.mapreduce.dialog.jobs.AverageFlightDelayDialog;
+import com.mapreduce.dialog.jobs.MinMaxFlightDelayDialog;
+import com.mapreduce.dialog.jobs.StdDevFlightDelayDialog;
+import com.mapreduce.dialog.jobs.TotalFlightsByAirlineDialog;
+import com.mapreduce.dialog.jobs.DailyCountOfDiffTailNumberDialog;
 import com.mapreduce.util.PrintStreamCapturer;
 import com.mapreduce.util.ProcessHandler;
 import com.mapreduce.util.ServiceStatus;
@@ -159,33 +157,25 @@ public class Main extends JFrame {
 			public void actionPerformed(ActionEvent e){
 				Job job = (Job) comboBox.getSelectedItem();
 				switch (job) {
-					case WeeklyAverageBikeCount:
-						System.out.println("Average book prices cliced");
-						new AverageBikesDialog();
+					case AverageFlightDelay:
+						System.out.println("Average Flight Delay clicked");
+						new AverageFlightDelayDialog();
 						break;
-					case MinMaxAvailableBike:
-						System.out.println("min max book clicked");
-						new MinMaxAvailableBikesDialog();
+					case MinMaxFlightDelay:
+						System.out.println("Min/Max Flight Delay clicked");
+						new MinMaxFlightDelayDialog();
 						break;
-					case StdDevBikeCount:
-						System.out.println("std book prices");
-						new StdAvailableBikeDialog();
+					case StdDevFlightDelay:
+						System.out.println("Std Dev Flight Delay clicked");
+						new StdDevFlightDelayDialog();
 						break;
-					case HourlyBikeCheckCount:
-						System.out.println("total book reviws clicked");
-						new BikeCheckDialog();
+					case TotalFlightsByAirline:
+						System.out.println("Total Flights By Airline clicked");
+						new TotalFlightsByAirlineDialog();
 						break;
-					case AverageDockCount:
-						System.out.println("total user reviews cliced");
-						new AverageDockDialog();
-						break;
-					case EbikeMechBikeComp:
-						System.out.println("EbikeMechBikeComp clicked");
-						new EbikeMechBikeCountCompDialog();
-						break;
-					case DailyTotalReportCount:
-						System.err.println("TotalNumerofDock clicked");
-						new DailyTotalReportCountDialog();
+					case DailyCountOfDiffTailNumber:
+						System.out.println("Daily Count Of Different Tail Numbers clicked");
+						new DailyCountOfDiffTailNumberDialog();
 						break;
 				}
 			}
@@ -300,12 +290,10 @@ public class Main extends JFrame {
 	}
 	
 	public enum Job {
-		WeeklyAverageBikeCount,
-		MinMaxAvailableBike,
-		StdDevBikeCount,
-		HourlyBikeCheckCount,
-		AverageDockCount, // daily saatlik dilimler
-		EbikeMechBikeComp, // 8er saatlik dilimler halinde karsilastirma
-		DailyTotalReportCount;
+		AverageFlightDelay,
+		MinMaxFlightDelay,
+		StdDevFlightDelay,
+		TotalFlightsByAirline,
+		DailyCountOfDiffTailNumber;
 	}
 }

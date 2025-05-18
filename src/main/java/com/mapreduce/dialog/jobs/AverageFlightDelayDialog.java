@@ -21,11 +21,11 @@ import javax.swing.border.EmptyBorder;
 
 import com.mapreduce.ReadWrite;
 import com.mapreduce.dialog.TableDialog;
-import com.mapreduce.jobs.minMaxAvailableBikeCount.MinMaxAvailableBikeRunner;
+import com.mapreduce.jobs.averageDelayTime.AverageFlightDelayRunner;
 import com.mapreduce.util.MultiRenderer;
 import com.mapreduce.util.SelectionManager;
 
-public class MinMaxAvailableBikesDialog extends JDialog {
+public class AverageFlightDelayDialog extends JDialog {
 
 	private final JPanel contentPanel = new JPanel();
 	private JLabel lblNewLabel_1;
@@ -35,8 +35,8 @@ public class MinMaxAvailableBikesDialog extends JDialog {
 	/**
 	 * Create the dialog.
 	 */
-	public MinMaxAvailableBikesDialog() {
-		setTitle("Min Max Bike Count");
+	public AverageFlightDelayDialog() {
+		setTitle("Average Flight Delay");
 		setBounds(100, 100, 554, 150);
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -109,15 +109,17 @@ public class MinMaxAvailableBikesDialog extends JDialog {
 						String output = textField.getText();
 						if (output == null || output.trim().isEmpty()) return;
 						long start = System.nanoTime();
-						MinMaxAvailableBikeRunner.run(selected, output);
+						AverageFlightDelayRunner.run(selected, output);
 						long end = System.nanoTime();
 						System.out.printf("%.2fs elapsed\n", ((end - start) * Math.pow(10, -9)));
 						try {
-								String[] results = ReadWrite.getFiles(output);
-								for (String res : results) {
-									if (res.contains("part"))
-										new TableDialog(new String[] {"Day", "Min","Max"}, ReadWrite.readTabular(res));
-								}
+							String[] results = ReadWrite.getFiles(output);
+                            System.out.println(results);
+							System.out.println(selected);
+							for (String res : results) {
+								if (res.contains("part"))
+									new TableDialog(new String[] {"Day of Week", "Average Arrival Delay"}, ReadWrite.readTabular(res));
+							}
 						} catch (Exception e1) {
 							e1.printStackTrace();
 							new TableDialog(new String[] {"ERROR"}, new Object[0][0]);
@@ -144,4 +146,4 @@ public class MinMaxAvailableBikesDialog extends JDialog {
 		setVisible(true);
 	}
 
-}
+} 
